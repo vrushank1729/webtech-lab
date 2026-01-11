@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDEU</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">PDEU</div>
+        <ul>
+            <li><a class="active" href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#announcement">Announcement</a></li>
+        </ul>
+    </nav>
+    <section class="hero" id="hero">
+        <svg viewBox="0 0 800 200">
+            <defs>
+                <!-- Animated gradient -->
+                <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ff2d55"/>
+                    <stop offset="100%" stop-color="#ff9f1c"/>
+                    <animateTransform attributeName="gradientTransform" type="translate" from="0 0" to="1 0" dur="4s" repeatCount="indefinite"/>
+                </linearGradient>
+
+                <!-- Small box pattern -->
+                <pattern id="boxes" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <rect width="8" height="8" fill="url(#grad)" />
+                </pattern>
+            </defs>
+
+            <!-- Text filled with pattern -->
+            <text x="50%" y="60%" text-anchor="middle" dominant-baseline="middle" font-size="120" font-weight="bold" fill="url(#boxes)">
+            PDEU
+            </text>
+        </svg>
+    </section>
+    <section class="about" id="about">
+        <div class="about-box">
+            <h2>About</h2>
+            <p>
+                Pandit Deendayal Energy University (PDEU) is a premier institution offering top-tier education in energy, engineering, management, and technology, fostering innovation and research. 
+                The university is committed to academic excellence, cutting-edge research, and holistic development of its students. 
+                With state-of-the-art laboratories, industry collaborations, and a vibrant campus life, PDEU nurtures creativity, critical thinking, and leadership qualities. 
+                Students gain hands-on experience through workshops, internships, and global exposure programs, preparing them to excel in their chosen fields. 
+                PDEU continues to build a sustainable, knowledge-driven environment that empowers students to contribute meaningfully to society and industry.
+            </p>
+        </div>
+    </section>
+    <section class="spacer"></section>
+    <section class="courses" id="courses">
+        <div class="courses-container">
+            <div class="course-card">
+                <img src="tech.jpg" alt="Course 1">
+                <h3>Technology</h3>
+                <p>Learn cutting-edge technologies including AI, IoT, and software development.</p>
+            </div>
+            <div class="course-card">
+                <img src="som.jpeg" alt="Course 2">
+                <h3>Management</h3>
+                <p>Develop leadership, strategy, and organizational skills for business success.</p>
+            </div>
+            <div class="course-card">
+                <img src="sls.jpg" alt="Course 3">
+                <h3>Liberal Studies</h3>
+                <p>Explore humanities, social sciences, and creative thinking to broaden perspectives.</p>
+            </div>
+        </div>
+    </section>
+    <section class="announcements" id="announcement">
+        <h2 class="section-title">Announcements</h2>
+
+        <div class="slider-frame">
+            <div class="slider-track">
+                
+                <div class="announcement-card">
+                    <h3>Energy Innovation Workshop</h3>
+                    <p><strong>Venue:</strong> PDEU Auditorium</p>
+                    <p><strong>Date:</strong> 25th Jan 2026</p>
+                    <p><strong>Organizer:</strong> Dept. of Energy</p>
+                    <p><strong>Contact:</strong> energy@pdeu.ac.in</p>
+                </div>
+
+                <div class="announcement-card">
+                    <h3>Management Symposium 2026</h3>
+                    <p><strong>Venue:</strong> PDEU Conference Hall</p>
+                    <p><strong>Date:</strong> 30th Jan 2026</p>
+                    <p><strong>Organizer:</strong> School of Management</p>
+                    <p><strong>Contact:</strong> management@pdeu.ac.in</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2026 PDEU</p>
+
+            <div class="footer-icons">
+                <!-- Email -->
+                <a href="mailto:info@pdeu.ac.in" aria-label="Email">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M2 4h20v16H2z" fill="none"/>
+                        <path d="M2 6l10 7 10-7" />
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/pdeu" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="5"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <circle cx="17.5" cy="6.5" r="1"/>
+                    </svg>
+                </a>
+
+                <!-- X (Twitter) -->
+                <a href="https://twitter.com/pdeu" target="_blank" aria-label="X">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4l16 16M20 4L4 20"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,415 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    font-size: 1.3rem;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.7);
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+body {
+    background-image: url("image.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+svg {
+    width: 80%;
+}
+
+text {
+    font-size: 11rem;
+    font-weight: 700;
+}
+
+.about-box {
+    background: white;
+    padding: 32px 48px;
+    border-radius: 16px;
+    width: 100%;
+    height: 85vh;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.about-box h2 {
+    font-size: 3.5rem;
+    font-family: 'Brush Script MT', cursive;
+    color: #1E3A8A;
+    margin-bottom: 24px;
+}
+
+.about-box p {
+    font-size: 1rem;
+    font-family: 'Lucida Handwriting', cursive;
+    color: #1E40AF;
+    line-height: 1.8;
+    letter-spacing: 1px;
+}
+
+@keyframes fadeSlideScroll {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+}
+
+.about-box {
+  opacity: 0;
+  transform: translateY(50px);
+
+  animation-name: fadeSlideScroll;
+  animation-timeline: view();
+  animation-range: entry 0% cover 100%;
+  animation-fill-mode: both;
+  animation-timing-function: linear;
+}
+
+
+.spacer {
+    height: 70vh; /* same as About section */
+    width: 100%;
+}
+
+
+/* Container: Use Grid to stack items in the center */
+.courses {
+    height: 100vh;
+    display: grid;
+    place-items: center; /* Centers the container content vertically/horizontally */
+    background: rgba(255,255,255,0.8);
+}
+
+.courses-container {
+    display: grid; /* Grid is best for stacking */
+    place-items: center; /* Center cards within the container */
+    width: 100%;
+    height: 320px;
+    position: relative;
+}
+
+/* Base Card */
+.course-card {
+    /* KEY FIX: Put all cards in row 1, column 1 so they stack */
+    grid-area: 1 / 1; 
+    
+    width: 300px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px; /* Added padding for looks */
+    
+    /* Animation Settings */
+    animation: stackToRow linear both; /* 'linear' is usually smoother for scroll-linked */
+    animation-timeline: view();
+    /* Start spreading when section enters, finish when fully visible */
+    animation-range: entry 0% cover 40%; 
+}
+
+/* Assign Indices */
+.course-card:nth-child(1) { --i: 1; z-index: 1; }
+.course-card:nth-child(2) { --i: 2; z-index: 2; } /* Middle card on top initially */
+.course-card:nth-child(3) { --i: 3; z-index: 1; }
+
+/* The Animation */
+@keyframes stackToRow {
+    0% {
+        /* Start stacked in the exact center */
+        transform: translateX(0) scale(0.85);
+        opacity: 0;
+    }
+    100% {
+        /* MATH: (Index - MiddleIndex) * (CardWidth + Gap) 
+           Here: Middle is 2. Width+Gap is approx 330px.
+           i=1 -> -330px (Left)
+           i=2 -> 0px (Center)
+           i=3 -> +330px (Right)
+        */
+        transform: translateX(calc((var(--i) - 2) * 330px)) scale(1);
+        opacity: 1;
+    }
+}
+
+.announcements {
+    height: 100vh;
+    padding: 64px 32px;
+    background: rgba(255, 210, 220, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-title {
+    font-size: 3rem;
+    color: #1E3A8A;
+    margin-bottom: 32px;
+    font-family: 'Brush Script MT', cursive;
+}
+
+/* 1. The Frame: The visible window */
+.slider-frame {
+    width: 100%;
+    max-width: 700px; /* Adjust this to make the card wider/narrower */
+    overflow: hidden; /* Hides the slide that isn't currently active */
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    background: white;
+}
+
+/* 2. The Track: Holds slides side-by-side */
+.slider-track {
+    display: flex;
+    /* WIDTH MATH: 100% * Number of Slides. 
+       We have 2 slides, so width is 200% */
+    width: 200%; 
+    
+    /* The Animation Loop */
+    animation: slideshow 10s infinite;
+}
+
+/* Pause the slideshow when the user hovers over it */
+.slider-track:hover {
+    animation-play-state: paused;
+}
+
+/* 3. The Card: Sizing */
+.announcement-card {
+    /* WIDTH MATH: 100% / Number of Slides. 
+       We have 2 slides, so 100/2 = 50% */
+    width: 50%; 
+    
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.announcement-card h3 {
+    font-size: 2rem;
+    color: #1E3A8A;
+    margin-bottom: 20px;
+}
+
+.announcement-card p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+/* 4. The Keyframes (The Magic) */
+@keyframes slideshow {
+    /* Total time: 10s.
+       We want to hold Slide 1 for a while, then move to Slide 2.
+    */
+    
+    /* 0% to 45%: Show Slide 1 (Left: 0) */
+    0%, 45% {
+        transform: translateX(0%);
+    }
+
+    /* 50% to 95%: Show Slide 2 (Left: -50%) */
+    /* Why -50%? Because the track is 200% wide. Moving it half-way shows the second half. */
+    50%, 95% {
+        transform: translateX(-50%);
+    }
+
+    /* 100%: Snap back to start instantly to loop */
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.footer {
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(8px);
+    padding: 24px 40px;
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer p {
+    color: #1E3A8A;
+    font-weight: 600;
+}
+
+.footer-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-icons a svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: #1E40AF;
+    stroke-width: 2;
+    transition: transform 0.2s, stroke 0.2s;
+}
+
+.footer-icons a:hover svg {
+    transform: scale(1.1);
+    stroke: #ff2d55;
+}
+
+
+
+
+
+
+
+
+
+/* --- RESPONSIVE FIXES --- */
+
+/* 1. Fix the Hero Text Scaling */
+/* We remove the fixed 'rem' size so SVG scales naturally */
+text {
+    font-size: unset; /* Let SVG attributes handle the size */
+}
+/* Ensure the text fits the SVG coordinate system (800x200) */
+svg text {
+    font-size: 150px; /* Units inside SVG viewbox, not screen pixels */
+}
+
+
+/* 2. LAPTOP ADJUSTMENTS (Screens smaller than 1200px) */
+@media (max-width: 1200px) {
+    /* Reduce the gap between course cards so they don't fly off-screen */
+    @keyframes stackToRow {
+        0% { transform: translateX(0) scale(0.85); opacity: 0; }
+        100% {
+            /* Reduce spread from 330px to 220px */
+            transform: translateX(calc((var(--i) - 2) * 220px)) scale(0.9);
+            opacity: 1;
+        }
+    }
+}
+
+
+/* 3. MOBILE & TABLET (Screens smaller than 768px) */
+@media (max-width: 768px) {
+    
+    /* Navbar: Stack logo and links vertically */
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .navbar ul {
+        margin-top: 10px;
+        gap: 10px;
+        font-size: 1rem;
+    }
+
+    /* About: Allow height to grow if text is long */
+    .about-box {
+        height: auto; 
+        min-height: 50vh;
+        padding: 24px;
+    }
+    .about-box h2 { font-size: 2.5rem; }
+
+    /* Courses: DISABLE the fancy sideways animation on mobile.
+       There isn't enough width. We will stack them vertically instead. */
+    .courses {
+        height: auto;
+        padding: 40px 0;
+        display: block; /* Remove grid centering to let them flow */
+    }
+    
+    .courses-container {
+        display: flex;
+        flex-direction: column; /* Stack vertically */
+        height: auto;
+        gap: 20px;
+        padding-bottom: 40px;
+    }
+
+    .course-card {
+        /* Reset Grid settings */
+        grid-area: auto; 
+        width: 90%; /* Fit screen width */
+        margin: 0 auto;
+        
+        /* Disable the specific stack animation */
+        animation: fadeUp 1s ease-out forwards;
+        opacity: 0;
+        animation-timeline: view();
+        animation-range: entry 10% cover 30%;
+        transform: none; /* Reset transform */
+    }
+
+    /* Simple fade up animation for mobile */
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Announcements: Stack vertically on mobile? 
+       Actually, your slider is responsive! We just adjust the width. */
+    .announcement-card {
+        width: 100%; /* Show 1 full card at a time on mobile */
+        padding: 20px;
+    }
+    .slider-track {
+        width: 200%; /* Still 2 slides */
+    }
+    .slider-frame {
+        height: 350px; /* Make it a bit shorter */
+    }
+}
