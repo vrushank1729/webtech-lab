@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Student Feedback Portal - Rate Your Semester</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated particles background -->
+    <div id="particles"></div>
+
+    <!-- Hamburger Menu Button (Mobile) -->
+    <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="header">
+                <h1>🎓 Feedback Portal</h1>
+                <p>Your voice matters! ✨</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+
+            <!-- Course Navigation -->
+            <div class="course-nav" id="courseNav">
+                <!-- Course navigation items will be generated here -->
+            </div>
+
+            <!-- Submit Button -->
+            <button class="submit-btn" id="submitBtn" onclick="submitFeedback()">
+                🚀 Submit
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Course cards will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">🎉</div>
+            <h2>Thank You!</h2>
+            <p>Your feedback has been successfully submitted. Your insights help us improve! 💙</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
